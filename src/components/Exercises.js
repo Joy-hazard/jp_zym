@@ -10,21 +10,22 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
 
-  useEffect(() => {
-    const fetchExercisesData = async () => {
-      let exercisesData = [];
+ useEffect(() => {
+  const fetchExercisesData = async () => {
+    let exercisesData = [];
 
-      if (bodyPart === 'all') {
-        exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
-      } else {
-        exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
-      }
+    if (bodyPart === 'all') {
+      exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+    } else {
+      exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
+    }
 
-      setExercises(exercisesData);
-    };
+    setExercises(exercisesData);
+  };
 
-    fetchExercisesData();
-  }, [bodyPart]);
+  fetchExercisesData();
+}, [bodyPart]); // eslint-disable-next-line react-hooks/exhaustive-deps
+
 
   // Pagination
   const indexOfLastExercise = currentPage * exercisesPerPage;
